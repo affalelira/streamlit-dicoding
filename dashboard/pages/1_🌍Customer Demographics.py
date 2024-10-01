@@ -3,43 +3,50 @@ import matplotlib.pyplot as plt
 import seaborn as sns 
 import streamlit as st 
 
-def create_customers_df():
-    customers_df = pd.read_csv('C:/Users/Affa Lelira Ibrahim/OneDrive/Documents/College UPN/VS Code/submission/data/olist_customers_dataset.csv')
-    
+def create_customers_df(df):
+    customers_df = df.groupby('customer_city').agg(
+        customer_count=('customer_id', 'count')
+    ).reset_index()
+   
     return customers_df
 
-customers_df = create_customers_df()
+def visualization_customers_state(customers_df):    
+    customers_df = customers_df.sort_values(by='customer_count', ascending=False)
 
-def visualization_customers_state():
-    customers_df = create_customers_df()
-    
-    customers_state = customers_df.groupby(by="customer_city").customer_id.nunique().reset_index()
-    customers_state.rename(columns={"customer_id": "customer_count"}, inplace=True)
-
-    fig, ax = plt.subplots(figsize=(10, 5))  
-    colors_ = ["#72BCD4"] + ["#D3D3D3"] * (len(customers_state) - 1) 
+    fig, ax = plt.subplots(figsize=(12, 6))  
+    colors = ['#004b87']  
+    colors += ['#1f77b4', '#4e99c5'] * 4  
+    colors = colors[:10] 
 
     sns.barplot(
         x="customer_count", 
         y="customer_city",
-        data=customers_state.sort_values(by="customer_count", ascending=False).head(10),  
-        palette=colors_,
+        data=customers_df.head(10),  
+        palette=colors,
         ax=ax
     )
 
-    ax.set_title("Number of Customers by City", loc="center", fontsize=15)
+    ax.set_title("Top 10 Cities by Number of Customers", loc="center", fontsize=15)
     ax.set_ylabel(None)
     ax.set_xlabel("Number of Customers", fontsize=12)
     ax.tick_params(axis='y', labelsize=12)
     
+    plt.tight_layout()
+
     return fig
+
+#file main_data dimasukkan ke dalam spreadsheet dikarenakan file mb yang besar sehingga tidak dapat di upload di github 
+url = "https://docs.google.com/spreadsheets/d/1PxqLf2Mc__Z5jFKajBhr5fQgNOlSmCx4g1zoRdYFQ3E/gviz/tq?tqx=out:csv"
+
+main_data = pd.read_csv(url)
+customers_df = create_customers_df(main_data)
 
 st.set_page_config(page_title="Customer Demographics", page_icon="🌍")
 
 st.markdown("# Customer demographics by city in Brazil")
 st.sidebar.header("Customer Demographics")
 
-demography = visualization_customers_state()
+demography = visualization_customers_state(customers_df)
 st.pyplot(demography)
 
 st.write(

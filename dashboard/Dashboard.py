@@ -6,7 +6,8 @@ st.set_page_config(
     page_icon="🛒",
 )
 
-st.image("C:/Users/Affa Lelira Ibrahim/Downloads/1_1k72mg1_CZvLptX77zzKTg.png")
+st.image("https://github.com/affalelira/assest/raw/main/1_1k72mg1_CZvLptX77zzKTg.png") 
+
 
 st.markdown("# Brazilian E-Commerce Public Dataset by Olist")
 

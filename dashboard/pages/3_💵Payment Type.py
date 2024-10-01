@@ -31,8 +31,10 @@ def visualization_payment_type(average_payment_by_type):
     
     return(fig)
     
+#file main_data dimasukkan ke dalam spreadsheet dikarenakan file mb yang besar sehingga tidak dapat di upload di github 
+url = "https://docs.google.com/spreadsheets/d/1PxqLf2Mc__Z5jFKajBhr5fQgNOlSmCx4g1zoRdYFQ3E/gviz/tq?tqx=out:csv"
 
-main_data = pd.read_csv("C:/Users/Affa Lelira Ibrahim/OneDrive/Documents/College UPN/VS Code/submission/dashboard/main_data.csv")
+main_data = pd.read_csv(url)
 average_payment_by_type = create_payment_type(main_data)
 
 st.set_page_config(page_title="Payment Type", page_icon="💵")

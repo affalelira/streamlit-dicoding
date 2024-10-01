@@ -58,7 +58,10 @@ def visualization_recency(rfm_df):
    
     return(fig)
 
-main_data = pd.read_csv("C:/Users/Affa Lelira Ibrahim/OneDrive/Documents/College UPN/VS Code/submission/dashboard/main_data.csv")
+#file main_data dimasukkan ke dalam spreadsheet dikarenakan file mb yang besar sehingga tidak dapat di upload di github 
+url = "https://docs.google.com/spreadsheets/d/1PxqLf2Mc__Z5jFKajBhr5fQgNOlSmCx4g1zoRdYFQ3E/gviz/tq?tqx=out:csv"
+
+main_data = pd.read_csv(url)
 
 rfm_df = create_rfm_df(main_data)
 
