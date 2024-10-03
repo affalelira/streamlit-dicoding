@@ -1,1 +1,5 @@
+<<<<<<< HEAD
 https://app-dicoding-k8tijsxappnur7vzudivb3p.streamlit.app/ 
+=======
+https://app-dicoding-k8tijsxappnur7vzudivb3p.streamlit.app/ 
+>>>>>>> bac8a8e18a9320b01934998ebb9cc5a56427e139
